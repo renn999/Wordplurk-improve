@@ -1,0 +1,253 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: Web Geeks\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: wordplurk-improve_adminpage.php:14
+msgid "Please check your Plurk username and password there is something wrong with pre login"
+msgstr "Vă rugăm să verificaţi numele de utilizator si parola Plurk nu este ceva în neregulă cu autentificare pre"
+
+#: wordplurk-improve_adminpage.php:26
+msgid "If you have bitly pro just select bit.ly or j.mp are the same."
+msgstr "Dacă aveţi bitly bit.ly pro doar selectaţi sau j.mp sunt aceleaşi."
+
+#: wordplurk-improve_adminpage.php:30
+msgid "Use Wordpress 3.0 wp_get_shortlink function to generate short url."
+msgstr "Funcţia Wordpress 3.0 wp_get_shortlink pentru a genera URL-ul scurt."
+
+#: wordplurk-improve_adminpage.php:38
+msgid "Settings"
+msgstr "Setări"
+
+#: wordplurk-improve_adminpage.php:39
+msgid "Please enter your Plurk username and password below. All fields are required."
+msgstr "Vă rugăm introduceţi numele de utilizator şi parola Plurk de mai jos. Toate câmpurile sunt obligatorii."
+
+#: wordplurk-improve_adminpage.php:52
+msgid "Username"
+msgstr "Numele de utilizator"
+
+#: wordplurk-improve_adminpage.php:55
+msgid "Enter the username of the Plurk account you want to post updates to."
+msgstr "Introduceţi numele contului Plurk doriţi să înregistraţi actualizări."
+
+#: wordplurk-improve_adminpage.php:58
+msgid "Password"
+msgstr "Parola"
+
+#: wordplurk-improve_adminpage.php:61
+msgid "Enter the password of the Plurk account entered above."
+msgstr "Introduceţi parola contului Plurk introdus mai sus."
+
+#: wordplurk-improve_adminpage.php:64
+msgid "ApiKey"
+msgstr "ApiKey"
+
+#: wordplurk-improve_adminpage.php:67
+msgid "Enter the Api Key of the Plurk account entered above."
+msgstr "Introduceţi cheia Api contului Plurk introdus mai sus."
+
+#: wordplurk-improve_adminpage.php:70
+msgid "Wordplurk Template"
+msgstr "Wordplurk şablon"
+
+#: wordplurk-improve_adminpage.php:73
+msgid "What template do you want to show on Plurk."
+msgstr "Ce şablon îl Arată pe Plurk."
+
+#: wordplurk-improve_adminpage.php:74
+msgid "Post URL Link"
+msgstr "Post URL Link"
+
+#: wordplurk-improve_adminpage.php:75
+msgid "Post Title"
+msgstr "Post titlu"
+
+#: wordplurk-improve_adminpage.php:76
+msgid "Part of the Post"
+msgstr "Parte de la Post"
+
+#: wordplurk-improve_adminpage.php:80
+msgid "Qualifier"
+msgstr "Calificare"
+
+#: wordplurk-improve_adminpage.php:84
+msgid "loves"
+msgstr "iubeşte"
+
+#: wordplurk-improve_adminpage.php:85
+msgid "likes"
+msgstr "îi place"
+
+#: wordplurk-improve_adminpage.php:86
+msgid "shares"
+msgstr "acţiuni"
+
+#: wordplurk-improve_adminpage.php:87
+msgid "gives"
+msgstr "oferă"
+
+#: wordplurk-improve_adminpage.php:88
+msgid "hates"
+msgstr "urăşte"
+
+#: wordplurk-improve_adminpage.php:89
+msgid "wants"
+msgstr "vrea"
+
+#: wordplurk-improve_adminpage.php:90
+msgid "has"
+msgstr "a"
+
+#: wordplurk-improve_adminpage.php:91
+msgid "will"
+msgstr "va"
+
+#: wordplurk-improve_adminpage.php:92
+msgid "asks"
+msgstr "întreabă"
+
+#: wordplurk-improve_adminpage.php:93
+msgid "wishes"
+msgstr "doreşte"
+
+#: wordplurk-improve_adminpage.php:94
+msgid "was"
+msgstr "a fost"
+
+#: wordplurk-improve_adminpage.php:95
+msgid "feels"
+msgstr "se simte"
+
+#: wordplurk-improve_adminpage.php:96
+msgid "thinks"
+msgstr "crede"
+
+#: wordplurk-improve_adminpage.php:97
+msgid "says"
+msgstr "spune"
+
+#: wordplurk-improve_adminpage.php:98
+msgid "is"
+msgstr "este"
+
+#: wordplurk-improve_adminpage.php:99
+msgid ":"
+msgstr ":"
+
+#: wordplurk-improve_adminpage.php:100
+msgid "freestyle"
+msgstr "Freestyle"
+
+#: wordplurk-improve_adminpage.php:101
+msgid "hopes"
+msgstr "speră"
+
+#: wordplurk-improve_adminpage.php:102
+msgid "needs"
+msgstr "nevoile"
+
+#: wordplurk-improve_adminpage.php:103
+msgid "wonders"
+msgstr "minuni"
+
+#: wordplurk-improve_adminpage.php:114
+msgid "Select the Qualifier of the Plurk account entered above."
+msgstr "Selectaţi calificativ de cont Plurk introdus mai sus."
+
+#: wordplurk-improve_adminpage.php:117
+msgid "language set"
+msgstr "limba set"
+
+#: wordplurk-improve_adminpage.php:163
+msgid "Select the language set of the Plurk account entered above."
+msgstr "Selectaţi setul de limba contului Plurk introdus mai sus."
+
+#: wordplurk-improve_adminpage.php:166
+msgid "Short url"
+msgstr "URL-ul scurt"
+
+#: wordplurk-improve_adminpage.php:192
+msgid "Using the shorturl service to short post url."
+msgstr "Utilizând serviciul de shorturl post scurt URL-ul."
+
+#: wordplurk-improve_adminpage.php:197
+msgid "Short url Username"
+msgstr "Scurt URL-ul de utilizator"
+
+#: wordplurk-improve_adminpage.php:200
+msgid "You need to fill in the username to enable the Short URL service."
+msgstr "Trebuie să completaţi numele de utilizator pentru a permite serviciului de URL-ul scurt."
+
+#: wordplurk-improve_adminpage.php:203
+msgid "Short url API key"
+msgstr "Scurt URL-ul API cheie"
+
+#: wordplurk-improve_adminpage.php:206
+msgid "You need to fill in the API KEY to enable the Short URL service"
+msgstr "Trebuie să completaţi API-cheie pentru a activa serviciul de URL-ul scurt"
+
+#: wordplurk-improve_adminpage.php:209
+msgid "Post Plurk Responses"
+msgstr "Răspuns de la post Plurk"
+
+#: wordplurk-improve_adminpage.php:212
+msgid "This select will show the Plurk Responses after the post"
+msgstr "Selectaţi acest va arăta răspunsurile Plurk după post"
+
+#: wordplurk-improve_adminpage.php:215
+msgid "Plurk Responses cache time"
+msgstr "Plurk răspunsuri cache timp"
+
+#: wordplurk-improve_adminpage.php:237
+msgid "Because of API calls limit is 50.000 calls pr. day, Plurk Responses cache time have to according to site traffic to make the best setting."
+msgstr "Din cauza limitei de API apeluri este de 50.000 de apeluri pr. zi, timp Plurk Răspunsuri cache-ul trebuie să în conformitate cu traficul site-ul pentru a face cea mai buna setare."
+
+#: wordplurk-improve_adminpage.php:242
+msgid "Save Changes"
+msgstr "Salvaţi modificările"
+
+#: wordplurk-improve_adminpage.php:247
+msgid "There are something wrong with the Curl test at your server, please check it was install and enabled, or contact your server admin"
+msgstr "Există ceva în neregulă cu testul Curl de la server-ul dvs., vă rugăm să verificaţi a fost de instalare şi activat, sau contactaţi administratorul de server"
+
+#: wordplurk-improve_adminpage.php:257
+#, php-format
+msgid "Please enter your Plurk username and password on the <a href=\"%1$s\" title=\"WordPlurk Settings\">WordPlurk Settings page</a>."
+msgstr "Vă rugăm introduceţi numele de utilizator şi parola pe Plurk <a href=\"%1$s\" title=\"WordPlurk Settings\"> WordPlurk pagina Setări </a>."
+
+#: wordplurk-improve_adminpage.php:259
+#, php-format
+msgid "WordPlurk-improve was detected update. Please go on the <a href=\"%1$s\" title=\"WordPlurk Settings\">WordPlurk Settings page</a> and click 'Save Changes' to finish update"
+msgstr "WordPlurk-îmbunătăţirea a fost detectat de actualizare. Vă rugăm să mergeţi pe <a href=\"%1$s\" title=\"WordPlurk Settings\"> WordPlurk pagina Setări </a> şi faceţi clic pe \"Salvaţi modificările\" pentru a finaliza actualizarea"
+
+#: wordplurk-improve.php:165
+#: wordplurk-improve.php:185
+msgid "Wordplurk improve"
+msgstr "Wordplurk îmbunătăţirea"
+
+#: wordplurk-improve.php:177
+msgid "Do not Plurk this post. (if the post hes been plurked, the plurk will be delete.)"
+msgstr "Nu Plurk acest post. (în cazul în care postul a fost HES plurked, plurk va fi şterge.)"
+
+#: wordplurk-improve_plurkcomment.php:129
+#, php-format
+msgid "this post has %d plurk responses, "
+msgstr "acest post a răspuns la plurk de %d, "
+
+#: wordplurk-improve_plurkcomment.php:129
+#: wordplurk-improve_plurkcomment.php:143
+#, php-format
+msgid "<a href=\"http://www.plurk.com/p/%s\">click here</a> to plurk page"
+msgstr "<a href=\"http://www.plurk.com/p/%s\"> click aici</a> la pagina plurk"
+
+#: wordplurk-improve_plurkcomment.php:143
+msgid "This post doesn't have any plurk response,"
+msgstr "Acest post nu are nici un răspuns plurk,"
+
