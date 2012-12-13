@@ -11,7 +11,7 @@ Text Domain: wordplurk-improve
 define('WPLURK_DIR',dirname(__FILE__));
 if(function_exists('load_plugin_textdomain')){
 	$plugin_dir = basename(WPLURK_DIR);
-	load_plugin_textdomain( 'wordplurk-improve', 'wp-content/plugins/' . $plugin_dir . '/language' );
+	load_plugin_textdomain( 'wordplurk-improve', false, $plugin_dir . '/language' );
 }
 
 require_once(WPLURK_DIR.'/wordplurk-improve_adminpage.php');
@@ -217,9 +217,9 @@ add_filter('the_content', 'wordplurkcomment');
 
 
 function wordplurk_load_headers() {
-  $jq_url = 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js';
+  $jq_url = 'http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js';
   wp_deregister_script('jquery');
-  wp_enqueue_script('jquery', $jq_url, false, '1.4.2');
+  wp_enqueue_script('jquery', $jq_url, false, '1.8.3');
 }
 
 add_action('wp_head', 'wordplurk_load_headers', 5);

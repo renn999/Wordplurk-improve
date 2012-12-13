@@ -3,44 +3,47 @@ function wordplurkcomment($content){
 	$post_id=get_the_ID();
 	$plurk_id=get_post_meta($post_id, 'plurk_id', true);
 	if(get_option('wordplurk_Plurk2tw_en','1') && $plurk_id && is_single()):
-		global $wpdb;
-		global $table_prefix;
-		$tablename = $table_prefix.'wordplurk_comment_cache';
+		if(get_option('wordplurk_ifem','0')):
+			$plurk_code = '<iframe width=\'100%\' src="http://www.plurk.com/m/p/'+ $plurk_id +'"></iframe>';
+		else:
+			global $wpdb;
+			global $table_prefix;
+			$tablename = $table_prefix.'wordplurk_comment_cache';
 
-		$sql = 'SHOW TABLES LIKE \'' . $tablename . '\'';
-		$results = $wpdb->query($sql);
-		if ($results == 0):
-			$sql = 'CREATE TABLE '. $tablename. ' (
-				`post_id` BIGINT UNSIGNED NOT NULL ,
-				`cache_text` LONGBLOB  NULL DEFAULT NULL ,
-				`update_time` DATETIME NULL DEFAULT NULL ,
-				PRIMARY KEY ( `post_id` )
-			)';
+			$sql = 'SHOW TABLES LIKE \'' . $tablename . '\'';
 			$results = $wpdb->query($sql);
-		endif;
-		$sql = 'select * from '.$tablename.' where post_id = '.$post_id.'';
-		$results = $wpdb->query($sql);
-		if ($results == 0):
-			$sql =  'INSERT INTO '.$tablename.' (`post_id`) VALUES ('.$post_id.')';
-			$wpdb->query($sql);
+			if ($results == 0):
+				$sql = 'CREATE TABLE '. $tablename. ' (
+					`post_id` BIGINT UNSIGNED NOT NULL ,
+					`cache_text` LONGBLOB  NULL DEFAULT NULL ,
+					`update_time` DATETIME NULL DEFAULT NULL ,
+					PRIMARY KEY ( `post_id` )
+				)';
+				$results = $wpdb->query($sql);
+			endif;
 			$sql = 'select * from '.$tablename.' where post_id = '.$post_id.'';
-		endif;
-		$results = $wpdb->get_row($sql,ARRAY_A);
-		$update_lim_time = strtotime($results['update_time']) + 60 * get_option('wordplurk_cmrt','10');
-		if(current_time('timestamp') > $update_lim_time ):
-			$getdata = array(
-    		'api_key' => get_option('wordplurk_apikey'), 
-    		'plurk_id' => base_convert($plurk_id,36,10)
-  		);
-			$results = plurk_update_status($getdata,'responses');
-			$sql = 'UPDATE '.$tablename.' SET `cache_text` = \''.$wpdb->escape($results).'\', `update_time` = \''.current_time('mysql').'\' WHERE post_id = '.$post_id;
-			$wpdb->query($sql);
-			$sql = 'select * from '.$tablename.' where post_id = '.$post_id.'';
+			$results = $wpdb->query($sql);
+			if ($results == 0):
+				$sql =  'INSERT INTO '.$tablename.' (`post_id`) VALUES ('.$post_id.')';
+				$wpdb->query($sql);
+				$sql = 'select * from '.$tablename.' where post_id = '.$post_id.'';
+			endif;
 			$results = $wpdb->get_row($sql,ARRAY_A);
-		endif;
-		$resp = json_decode($results['cache_text'],true);
-		unset($plurk_code);
-		$plurk_code  = <<<EOF
+			$update_lim_time = strtotime($results['update_time']) + 60 * get_option('wordplurk_cmrt','10');
+			if(current_time('timestamp') > $update_lim_time ):
+				$getdata = array(
+		  		'api_key' => get_option('wordplurk_apikey'), 
+		  		'plurk_id' => base_convert($plurk_id,36,10)
+				);
+				$results = plurk_update_status($getdata,'responses');
+				$sql = 'UPDATE '.$tablename.' SET `cache_text` = \''.$wpdb->escape($results).'\', `update_time` = \''.current_time('mysql').'\' WHERE post_id = '.$post_id;
+				$wpdb->query($sql);
+				$sql = 'select * from '.$tablename.' where post_id = '.$post_id.'';
+				$results = $wpdb->get_row($sql,ARRAY_A);
+			endif;
+			$resp = json_decode($results['cache_text'],true);
+			unset($plurk_code);
+			$plurk_code  = <<<EOF
 <style type="text/css">
 div.wpc, div.wpc img, div.wpc div, div#plurk_box table, div#plurk_box tr, div#plurk_box td {
  float:none;
@@ -58,7 +61,7 @@ div.wpc, div.wpc img, div.wpc div, div#plurk_box table, div#plurk_box tr, div#pl
 </style>
 EOF;
 //clear CSS
-		$plurk_code .= <<<EOF
+			$plurk_code .= <<<EOF
 <style type="text/css">
 div.wpc { background-color: #FFFFFF;border:1px solid #888888!important; font-size:14px!important; width: 100%;}
 div.wpc div.wpc_head {padding: 5px!important;}
@@ -67,9 +70,9 @@ div#plurk_box_body{overflow-y:auto;height:200px;padding:5px;}
 div#plurk_box_foot{background-color:#EEEEEE;text-align:right;margin:auto;padding:0px 5px;}
 </style>
 EOF;
-		$rsp_count = count($resp['responses']);
-		if($rsp_count > 0 ):
-			$plurk_code .= <<<EOF
+			$rsp_count = count($resp['responses']);
+			if($rsp_count > 0 ):
+				$plurk_code .= <<<EOF
 <script type="text/javascript">
 var \$q = jQuery.noConflict();
 \$q().ready(function(){
@@ -87,7 +90,7 @@ var \$q = jQuery.noConflict();
 });
 </script>
 EOF;
-			$plurk_code .= <<<EOF
+				$plurk_code .= <<<EOF
 <style type="text/css">
 span#plurk_box_close a:hover{cursor:pointer;}
 span#plurk_box_open a:hover{cursor:pointer;}
@@ -125,22 +128,23 @@ a.name:hover{text-decoration:underline;color:#111;}
 .q_shares,.q_had{border-right:1px solid #454545;border-bottom:1px solid #454545;}
 </style>
 EOF;
-			$plurk_code .= '<div class=\'wpc\'><div class="wpc_head">';
-			$plurk_code .= sprintf(_n("this post has %d plurk response, ", "this post has %d plurk responses, ", $rsp_count, 'wordplurk-improve'), $rsp_count).sprintf(__("<a href=\"http://www.plurk.com/p/%s\">click here</a> to plurk page", 'wordplurk-improve'), $plurk_id).'<span id="plurk_box_open"><a>[＋]</a></span><span id="plurk_box_close"><a>[－]</a></span></div>';
-			$plurk_code .= '<div id="plurk_box"><div id=plurk_box_head>最近的 plurk 回應：</div><div id="plurk_box_body">';
-			foreach($resp['responses'] as $resps):
-				if($resp['friends']["{$resps['user_id']}"]['has_profile_image'] == 1 && $resp['friends']["{$resps['user_id']}"]['avatar'] == 0):
-					$userimg='http://avatars.plurk.com/'.$resps['user_id'].'-small.gif ';
-				elseif($resp['friends']["{$resps['user_id']}"]['has_profile_image'] == 1 && $resp['friends']["{$resps['user_id']}"]['avatar'] != 0):
-					$userimg='http://avatars.plurk.com/'.$resps['user_id'].'-small'.$resp['friends']["{$resps['user_id']}"]['avatar'].'.gif';
-				else:
-					$userimg='http://www.plurk.com/static/default_small.gif';
-				endif;
-				$plurk_code .= '<table><tr><td><a href="http://www.plurk.com/'.$resp['friends']["{$resps['user_id']}"]['nick_name'].'"><img src="'.$userimg.'" valign="middle" height="20px" width="20px"></a></td><td class="td_qual" valign="top"><a class="name" href="http://www.plurk.com/'.$resp['friends']["{$resps['user_id']}"]['nick_name'].'">'.$resp['friends']["{$resps['user_id']}"]['display_name'].'</a><span class="qualifier q_'.$resps['qualifier'].'">'.$resps['qualifier_translated'].'</span></td><td class="td_cnt" valign="top">'.$resps['content'].'</td></tr></table>';
-			endforeach;
-			$plurk_code .= '</div><div id="plurk_box_foot"><div>powered by <a href="http://wordpress.org/extend/plugins/wordplurk-improve/">wordplurk improve</a></div></div></div></div>';
-		else:
-			$plurk_code .= '<div class=\'wpc\'><div class="wpc_head">'.sprintf(__("This post doesn't have any plurk response,", 'wordplurk-improve')). sprintf(__("<a href=\"http://www.plurk.com/p/%s\">click here</a> to plurk page", 'wordplurk-improve'), $plurk_id).'</div></div>';
+				$plurk_code .= '<div class=\'wpc\'><div class="wpc_head">';
+				$plurk_code .= sprintf(_n("this post has %d plurk response, ", "this post has %d plurk responses, ", $rsp_count, 'wordplurk-improve'), $rsp_count).sprintf(__("<a href=\"http://www.plurk.com/p/%s\">click here</a> to plurk page", 'wordplurk-improve'), $plurk_id).'<span id="plurk_box_open"><a>[＋]</a></span><span id="plurk_box_close"><a>[－]</a></span></div>';
+				$plurk_code .= '<div id="plurk_box"><div id=plurk_box_head>最近的 plurk 回應：</div><div id="plurk_box_body">';
+				foreach($resp['responses'] as $resps):
+					if($resp['friends']["{$resps['user_id']}"]['has_profile_image'] == 1 && $resp['friends']["{$resps['user_id']}"]['avatar'] == 0):
+						$userimg='http://avatars.plurk.com/'.$resps['user_id'].'-small.gif ';
+					elseif($resp['friends']["{$resps['user_id']}"]['has_profile_image'] == 1 && $resp['friends']["{$resps['user_id']}"]['avatar'] != 0):
+						$userimg='http://avatars.plurk.com/'.$resps['user_id'].'-small'.$resp['friends']["{$resps['user_id']}"]['avatar'].'.gif';
+					else:
+						$userimg='http://www.plurk.com/static/default_small.gif';
+					endif;
+					$plurk_code .= '<table><tr><td><a href="http://www.plurk.com/'.$resp['friends']["{$resps['user_id']}"]['nick_name'].'"><img src="'.$userimg.'" valign="middle" height="20px" width="20px"></a></td><td class="td_qual" valign="top"><a class="name" href="http://www.plurk.com/'.$resp['friends']["{$resps['user_id']}"]['nick_name'].'">'.$resp['friends']["{$resps['user_id']}"]['display_name'].'</a><span class="qualifier q_'.$resps['qualifier'].'">'.$resps['qualifier_translated'].'</span></td><td class="td_cnt" valign="top">'.$resps['content'].'</td></tr></table>';
+				endforeach;
+				$plurk_code .= '</div><div id="plurk_box_foot"><div>powered by <a href="http://wordpress.org/extend/plugins/wordplurk-improve/">wordplurk improve</a></div></div></div></div>';
+			else:
+				$plurk_code .= '<div class=\'wpc\'><div class="wpc_head">'.sprintf(__("This post doesn't have any plurk response,", 'wordplurk-improve')). sprintf(__("<a href=\"http://www.plurk.com/p/%s\">click here</a> to plurk page", 'wordplurk-improve'), $plurk_id).'</div></div>';
+			endif;
 		endif;
 		return $content.$plurk_code;
 	else:

@@ -45,7 +45,7 @@ if(function_exists('curl_init')):
 		wp_nonce_field('update-options');
 	?>
 	<input type="hidden" name="action" value="update" />
-	<input type="hidden" name="page_options" value="wordplurk_username, wordplurk_password, wordplurk_apikey,wordplurk_qualifier,wordplurk_language_set,wordplurk_template,wordplurk_shorturl_en,wordplurk_Plurk2tw_en,wordplurk_login,wordplurk_suapi_user,wordplurk_suapi_key,wordplurk_cmrt" />
+	<input type="hidden" name="page_options" value="wordplurk_username, wordplurk_password, wordplurk_apikey, wordplurk_qualifier, wordplurk_language_set, wordplurk_template, wordplurk_shorturl_en, wordplurk_Plurk2tw_en, wordplurk_login, wordplurk_suapi_user, wordplurk_suapi_key, wordplurk_cmrt" />
 	<?php endif; ?>
 	<table class="form-table">
 	<tr valign="top">
