@@ -1,10 +1,10 @@
 === WordPlurk improve ===
 Contributors: renn999, bluefur, Speedboxer
-Donate link: http://www.renn999.twbbs.org/wordpress/wordplurk-improve
+Donate link: http://www.renn999.twbbs.org/wordplurk-improve
 Tags: plurk
-Requires at least: 2.6+
-Tested up to: 3.0.1
-Stable tag: 2.2.1
+Requires at least: 3.0
+Tested up to: 3.4
+Stable tag: 3.0
 
 WordPlurk improve is Base on 'WordPlurk', and add more settings and functions.
 
@@ -12,16 +12,24 @@ WordPlurk improve is Base on 'WordPlurk', and add more settings and functions.
 Generates Plurk Updates when a new Post is Published, Useing Official Plurk api, and Setting improve. Orginal Home page <a href="http://blog.bluefur.com/wordplurk">http://blog.bluefur.com/wordplurk</a>
 Post Plurk Responses can show after the post.
 
+** Github page **
+https://github.com/renn999/Wordplurk-improve
+
+** Bug Report **
+https://github.com/renn999/Wordplurk-improve/issues
+
+If you want to report bug or add new language. Please open a new issue using github. :-)
+
 == Installation ==
 
 1. Download wordplurk improve.
 2. Unzip and put 'wordplurk-improve' into `/wp-content/plugins/` directory
 3. Activate the plugin through the 'Plugins' menu in WordPress.
-4. Set your Plurk Username password API key ,etc.(Settings > WordPlurk)
+4. Set your WordPlurk-improve. (Settings > WordPlurk)
 
 == Configuration ==
 
-The available options are located at Settings > WordPlurk. This is where you set the username and password of the Plurk account you want updates posted to.
+The available options are located at Settings > WordPlurk.
 
 == Known Issues ==
 
@@ -38,7 +46,10 @@ A: It is means that your server not support php curl please contect your adminst
 == Changelog ==
 
 = 3.0 =
-* Add Romanian language. ( thanks Alexander Ovsov "pivnyukip<AT>gmail.com" )
+* (NEW) Add Romanian language. ( thanks Alexander Ovsov "pivnyukip<AT>gmail.com" )
+* (FIX) Upgrade plurk API using version 2.0.
+* (FIX) drop dummy setting.
+* (FIX) iFrame embed add for choies.
 
 = 2.2.1 =
 * (FIX) The count of words might be wrong!

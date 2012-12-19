@@ -2,61 +2,31 @@
 function wordplurkcomment($content){
 	$post_id=get_the_ID();
 	$plurk_id=get_post_meta($post_id, 'plurk_id', true);
-	if(get_option('wordplurk_Plurk2tw_en','1') && $plurk_id && is_single()):
-		if(get_option('wordplurk_ifem','0')):
-			$plurk_code = '<iframe width=\'100%\' src="http://www.plurk.com/m/p/'+ $plurk_id +'"></iframe>';
+	if(get_option('wordplurk_Plurk2tw_en','1') > 0 && $plurk_id && is_single()):
+		if(get_option('wordplurk_Plurk2tw_en','1') == 2):
+			$plurk_code = '<iframe width=\'100%\' height=\'200px\' src="http://www.plurk.com/m/p/'.$plurk_id.'"></iframe>';
 		else:
-			global $wpdb;
-			global $table_prefix;
-			$tablename = $table_prefix.'wordplurk_comment_cache';
-
-			$sql = 'SHOW TABLES LIKE \'' . $tablename . '\'';
-			$results = $wpdb->query($sql);
-			if ($results == 0):
-				$sql = 'CREATE TABLE '. $tablename. ' (
-					`post_id` BIGINT UNSIGNED NOT NULL ,
-					`cache_text` LONGBLOB  NULL DEFAULT NULL ,
-					`update_time` DATETIME NULL DEFAULT NULL ,
-					PRIMARY KEY ( `post_id` )
-				)';
-				$results = $wpdb->query($sql);
-			endif;
-			$sql = 'select * from '.$tablename.' where post_id = '.$post_id.'';
-			$results = $wpdb->query($sql);
-			if ($results == 0):
-				$sql =  'INSERT INTO '.$tablename.' (`post_id`) VALUES ('.$post_id.')';
-				$wpdb->query($sql);
-				$sql = 'select * from '.$tablename.' where post_id = '.$post_id.'';
-			endif;
-			$results = $wpdb->get_row($sql,ARRAY_A);
-			$update_lim_time = strtotime($results['update_time']) + 60 * get_option('wordplurk_cmrt','10');
-			if(current_time('timestamp') > $update_lim_time ):
-				$getdata = array(
-		  		'api_key' => get_option('wordplurk_apikey'), 
-		  		'plurk_id' => base_convert($plurk_id,36,10)
-				);
-				$results = plurk_update_status($getdata,'responses');
-				$sql = 'UPDATE '.$tablename.' SET `cache_text` = \''.$wpdb->escape($results).'\', `update_time` = \''.current_time('mysql').'\' WHERE post_id = '.$post_id;
-				$wpdb->query($sql);
-				$sql = 'select * from '.$tablename.' where post_id = '.$post_id.'';
-				$results = $wpdb->get_row($sql,ARRAY_A);
-			endif;
-			$resp = json_decode($results['cache_text'],true);
+			$getdata = array(
+				'api_key' => get_option('wordplurk_apikey'), 
+				'plurk_id' => base_convert($plurk_id,36,10)
+			);
+			$results = plurk_update_status($getdata,'responses');
+			$resp = json_decode($results,true);
 			unset($plurk_code);
 			$plurk_code  = <<<EOF
 <style type="text/css">
 div.wpc, div.wpc img, div.wpc div, div#plurk_box table, div#plurk_box tr, div#plurk_box td {
- float:none;
- margin: 0;
- padding: 0;
- border: 0;
- outline: 0;
- font-weight: normal;
- font-style: normal;
- font-size: 100%;
- font-family: inherit;
- vertical-align: sub;
- line-height: 20px!important;
+float:none;
+margin: 0;
+padding: 0;
+border: 0;
+outline: 0;
+font-weight: normal;
+font-style: normal;
+font-size: 100%;
+font-family: inherit;
+vertical-align: sub;
+line-height: 20px!important;
 }
 </style>
 EOF;

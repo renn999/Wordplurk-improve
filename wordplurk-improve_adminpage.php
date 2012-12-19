@@ -2,16 +2,9 @@
 function wordplurk_options_subpanel()
 {
 if(function_exists('curl_init')):
-	if(get_option('wordplurk_login') == 'uncheck'){
-		$plurk_return_info = json_decode(plurk_login(),true);
-		if($plurk_return_info['success_text']== 'ok')
-			update_option('wordplurk_login','true');
-		else
-			update_option('wordplurk_login','false');
-	}
-
-	if(get_option('wordplurk_login') == 'false'){
-		echo '<div class="updated fade" style="padding: 5px;">' . sprintf(__('Please check your Plurk username and password there is something wrong with pre login', 'wordplurk-improve')) . '</div>';
+	$i = json_decode(get_option('wordplurk_login'),true);
+	if (!isset($i['success']) || isset($_POST['wordplurk_reoauth'])){
+		plurk_oauth(isset($_POST['wordplurk_reoauth']));
 	}
 	?>
 	<script type="text/javascript">
@@ -37,6 +30,9 @@ if(function_exists('curl_init')):
 	<div class="wrap">
 	<h2>WordPlurk <?php _e('Settings', 'wordplurk-improve'); ?></h2>
 	<p><?php _e('Please enter your Plurk username and password below. All fields are required.', 'wordplurk-improve'); ?></p>
+	<form method="post" action="">
+	<input type="submit" name="wordplurk_reoauth" value="<?php _e('ReOauthorize', 'wordplurk-improve') ?>" />
+	</form>
 	<form method="post" action="options.php">
 	<?php
 	if(function_exists('settings_fields')):
@@ -45,27 +41,9 @@ if(function_exists('curl_init')):
 		wp_nonce_field('update-options');
 	?>
 	<input type="hidden" name="action" value="update" />
-	<input type="hidden" name="page_options" value="wordplurk_username, wordplurk_password, wordplurk_apikey, wordplurk_qualifier, wordplurk_language_set, wordplurk_template, wordplurk_shorturl_en, wordplurk_Plurk2tw_en, wordplurk_login, wordplurk_suapi_user, wordplurk_suapi_key, wordplurk_cmrt" />
+	<input type="hidden" name="page_options" value="wordplurk_qualifier, wordplurk_language_set, wordplurk_template, wordplurk_shorturl_en, wordplurk_Plurk2tw_en, wordplurk_suapi_user, wordplurk_suapi_key, wordplurk_login" />
 	<?php endif; ?>
 	<table class="form-table">
-	<tr valign="top">
-	<th scope="row"><label for="wordplurk_username">Plurk <?php _e('Username', 'wordplurk-improve'); ?></label></th>
-	<td><input type="text" name="wordplurk_username" value="<?php echo get_option('wordplurk_username'); ?>">
-	<br />
-	<?php _e('Enter the username of the Plurk account you want to post updates to.', 'wordplurk-improve');?></td>
-	</tr>
-	<tr valign="top">
-	<th scope="row"><label for="wordplurk_password">Plurk <?php _e('Password', 'wordplurk-improve'); ?></label></th>
-	<td><input type="password" name="wordplurk_password" value="<?php echo get_option('wordplurk_password'); ?>">
-	<br />
-	<?php _e('Enter the password of the Plurk account entered above.', 'wordplurk-improve');?></td>
-	</tr>
-	<tr valign="top">
-	<th scope="row"><label for="wordplurk_apikey">Plurk <?php _e('ApiKey', 'wordplurk-improve'); ?></label></th>
-	<td><input type="text" name="wordplurk_apikey" value="<?php echo get_option('wordplurk_apikey'); ?>">
-	<br />
-	<?php _e('Enter the Api Key of the Plurk account entered above.', 'wordplurk-improve');?></td>
-	</tr>
 	<tr valign="top">
 	<th scope="row"><label for="wordplurk_template"><?php _e('Wordplurk Template', 'wordplurk-improve'); ?></label></th>
 	<td><input type="text" name="wordplurk_template" value="<?php echo get_option('wordplurk_template','%%url%% - %%title%%'); ?>">
@@ -207,38 +185,28 @@ if(function_exists('curl_init')):
 	</tr>
 	<tr valign="top">
 	<th scope="row"><label for="wordplurk_Plurk2tw_en"><?php _e('Post Plurk Responses', 'wordplurk-improve'); ?></label></th>
-	<td><input type="checkbox" name="wordplurk_Plurk2tw_en" value="1" <?php checked(true, get_option('wordplurk_Plurk2tw_en','1'));?>>
-	<br />
-	<?php _e('This select will show the Plurk Responses after the post', 'wordplurk-improve');?></td>
-	</tr>
-	<tr valign="top">
-	<th scope="row"><label for="wordplurk_cmrt"><?php _e('Plurk Responses cache time', 'wordplurk-improve'); ?></label></th>
-	<td><select type="text" name="wordplurk_cmrt">
+	<td>
+	<select type="text" name="wordplurk_Plurk2tw_en">
 	<?php
-	$cmrt=array(
-		'10'	=> '10 min',
-		'20'	=> '20 min',
-		'30'	=> '30 min',
-		'60'	=> '1 hr',
-		'120' => '2 hr',
-		'360' => '6 hr',
-		'720' => '12hr',
-		'1440'=> '1 day',
+	$Plurk2tw_en=array(
+		'0' => 'Disable',
+		'1'	=> 'Default Type',
+		'2' => 'iframe embed',
 	);
-	foreach($cmrt as $key => $val){
+	
+	foreach($Plurk2tw_en as $key => $val){
 		echo "\t\t<option value=\"$key\"";
-		echo (get_option('wordplurk_cmrt','10')==$key)?' selected="selected"':'';
+		echo (get_option('wordplurk_Plurk2tw_en','1')==$key)?' selected="selected"':'';
 		echo ">".$val."</option>\n";
 	}
-	unset($cmrt);
+	unset($Plurk2tw_en);
 	?>
 	</select>
 	<br />
-	<?php _e('Because of API calls limit is 50.000 calls pr. day, Plurk Responses cache time have to according to site traffic to make the best setting.', 'wordplurk-improve');?><br />
-	</td>
+	<?php _e('This select will show the Plurk Responses after the post', 'wordplurk-improve');?></td>
 	</tr>
 	</table>
-	<input type="hidden" name="wordplurk_login" value="uncheck" />
+	<input type="hidden" name="wordplurk_login" value='<?php echo get_option('wordplurk_login','') ?>' />
 	<p class="submit"><input type="submit" name="submit" value="<?php _e('Save Changes', 'wordplurk-improve') ?>" /></p>
 	</form>
 	</div>
@@ -252,11 +220,11 @@ endif;
 
 function wordplurk_notice()
 {
-	if (!get_option('wordplurk_username') || !get_option('wordplurk_password') || !get_option('wordplurk_apikey') || !get_option('wordplurk_qualifier') || !get_option('wordplurk_language_set') || !get_option('wordplurk_template'))
-	{
-		echo '<div class="updated fade" style="padding: 5px;">' . sprintf(__('Please enter your Plurk username and password on the <a href="%1$s" title="WordPlurk Settings">WordPlurk Settings page</a>.', 'wordplurk-improve'), "options-general.php?page=".basename(WPLURK_DIR)."/wordplurk-improve.php") . '</div>';
-	}elseif(!get_option('wordplurk_login')){
-		echo '<div class="updated fade" style="padding: 5px;">' . sprintf(__('WordPlurk-improve was detected update. Please go on the <a href="%1$s" title="WordPlurk Settings">WordPlurk Settings page</a> and click \'Save Changes\' to finish update', 'wordplurk-improve'), "options-general.php?page=".basename(WPLURK_DIR)."/wordplurk-improve.php") . '</div>';
+	$i = json_decode(get_option('wordplurk_login'),true);
+	if (!isset($i['success']) && !isset($_GET['oauth_verifier'])){
+		echo '<div class="updated fade" style="padding: 5px;">' . sprintf(__('Please authorize Wordplurk-improve on the <a href="%1$s" title="WordPlurk Settings">WordPlurk Settings page</a>.', 'wordplurk-improve'), "options-general.php?page=".basename(WPLURK_DIR)."/wordplurk-improve.php") . '</div>';
+	}elseif (!get_option('wordplurk_qualifier') || !get_option('wordplurk_language_set') || !get_option('wordplurk_template')){
+		echo '<div class="updated fade" style="padding: 5px;">' . sprintf(__('Please set your Wordplurk-improve Settings on the <a href="%1$s" title="WordPlurk Settings">WordPlurk Settings page</a>.', 'wordplurk-improve'), "options-general.php?page=".basename(WPLURK_DIR)."/wordplurk-improve.php") . '</div>';
 	}
 }
 ?>

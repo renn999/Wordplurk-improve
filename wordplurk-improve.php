@@ -1,10 +1,10 @@
 <?php
 /*
 Plugin Name: WordPlurk improve
-Plugin URI: http://www.renn999.twbbs.org/wordpress/wordplurk-improve
+Plugin URI: http://www.renn999.twbbs.org/wordplurk-improve
 Description: Generates Plurk Updates when a new Post is Published, Useing Official Plurk api, and Setting improve. Orginal Home page <a href="http://blog.bluefur.com/wordplurk">http://blog.bluefur.com/wordplurk</a>
 Author: <a href="http://www.renn999.twbbs.org">Renn999</a>, bluefur, Speedboxer.
-Version: 2.2.1
+Version: 3.0
 Text Domain: wordplurk-improve
 */
 
@@ -14,6 +14,7 @@ if(function_exists('load_plugin_textdomain')){
 	load_plugin_textdomain( 'wordplurk-improve', false, $plugin_dir . '/language' );
 }
 
+require_once(WPLURK_DIR.'/OAuthSimple.php');
 require_once(WPLURK_DIR.'/wordplurk-improve_adminpage.php');
 require_once(WPLURK_DIR.'/wordplurk-improve_shorturlapi.php');
 require_once(WPLURK_DIR.'/wordplurk-improve_plurkapicalls.php');
@@ -21,19 +22,18 @@ require_once(WPLURK_DIR.'/wordplurk-improve_plurkcomment.php');
 
 function wordplurk_post_now_published($new_status, $old_status, $post)
 {
-
 	$post_id = $post->ID;
 	
-	$plurk_apikey = get_option('wordplurk_apikey', 0);
 	$plurk_template = get_option('wordplurk_template', 0);
 	$shurl_api_user = get_option('wordplurk_suapi_user', 0);
 	$shurl_api_key = get_option('wordplurk_suapi_key', 0);
 	
 	$has_been_plurked = get_post_meta($post_id, 'has_been_plurked', true);
 	query_posts('p=' . $post_id);
-	if (have_posts() && get_option('wordplurk_login') == 'true'):
+	$i = json_decode(get_option('wordplurk_login'),true);
+	if (isset($i['success'])):
 		the_post();
-		if($_POST['wordplurk_plurkornot']):
+		if(isset($_POST['wordplurk_plurkornot'])):
 			add_post_meta($post_id, 'wordplurk_plurkornot', $_POST['wordplurk_plurkornot']);
 			$new_status = 'trash';
 		else:
@@ -42,6 +42,7 @@ function wordplurk_post_now_published($new_status, $old_status, $post)
 		
 		$plurkornot = get_post_meta($post_id, 'wordplurk_plurkornot', true);
 		if($new_status == 'publish' && $plurkornot != 1):
+			
 			switch(get_option('wordplurk_shorturl_en','1')):
 				case 1:
 					$post_url = curl_file_get_contents('http://tinyurl.com/api-create.php?url=' . urlencode(get_permalink()));
@@ -116,20 +117,18 @@ function wordplurk_post_now_published($new_status, $old_status, $post)
 			
 		endif;
 
-		if($new_status == 'publish' && $old_status == 'publish' && $has_been_plurked == 'yes' && $plurkornot != 1):
+		if($new_status == 'publish' && $old_status == $new_status && $has_been_plurked == 'yes' && $plurkornot != 1):
 			
 			$status_data=array(
-				'api_key' => "$plurk_apikey",
 				'plurk_id' => base_convert(get_post_meta($post_id, 'plurk_id', true), 36, 10),
 				'content' => "$i"
 			);
 				
 			plurk_update_status($status_data, 'edit');
-		elseif($new_status == 'publish' && $has_been_plurked != 'yes' && $plurkornot != 1):
+		elseif($new_status == 'publish' && $old_status != $new_status && $has_been_plurked != 'yes' && $plurkornot != 1):
 			$plurk_qualifier = get_option('wordplurk_qualifier', 0);
 			$plurk_language_set = get_option('wordplurk_language_set', 0);
-			$status_data=array(
-				'api_key' => "$plurk_apikey", 
+			$status_data=array( 
 				'qualifier' => "$plurk_qualifier",
 				'content' => "$i",
 				'no_comments' => '0',
@@ -141,10 +140,8 @@ function wordplurk_post_now_published($new_status, $old_status, $post)
 			add_post_meta($post_id, 'has_been_plurked', 'yes');
 			add_post_meta($post_id, 'plurk_id', base_convert($plurk_return_info['plurk_id'], 10, 36));
 		
-		elseif($new_status == 'trash' && $old_status == 'publish' && $has_been_plurked == 'yes'):
-			
+		elseif($new_status == 'trash' && $has_been_plurked == 'yes'):
 			$status_data=array(
-				'api_key' => "$plurk_apikey",
 				'plurk_id' => base_convert(get_post_meta($post_id, 'plurk_id', true), 36, 10)
 			);
 				
@@ -160,7 +157,7 @@ add_action('transition_post_status', 'wordplurk_post_now_published', 10, 3);
 
 function wordplurk_add_plugin_option(){
 	if (function_exists('add_options_page'))
-		add_options_page('WordPlurk improve', 'WordPlurk improve', 10, basename(WPLURK_DIR).'/wordplurk-improve.php', 'wordplurk_options_subpanel');
+		add_options_page('WordPlurk improve', 'WordPlurk improve', 'administrator', basename(WPLURK_DIR).'/wordplurk-improve.php', 'wordplurk_options_subpanel');
 
 	if( function_exists( 'add_meta_box' )):
 		add_meta_box( 'wordplurk_sectionid', __( 'Wordplurk improve', 'wordplurk-improve' ), 'wordplurk_inner_custom_box', 'post' );
@@ -191,20 +188,15 @@ function wordplurk_old_custom_box() {
 
 function wordplurk_init(){
 	if(function_exists('register_setting')):
-		register_setting('wordplurk-options', 'wordplurk_username');
-		register_setting('wordplurk-options', 'wordplurk_password');
-		register_setting('wordplurk-options', 'wordplurk_apikey');
 		register_setting('wordplurk-options', 'wordplurk_qualifier');
 		register_setting('wordplurk-options', 'wordplurk_language_set');
 		register_setting('wordplurk-options', 'wordplurk_template');
 		register_setting('wordplurk-options', 'wordplurk_shorturl_en');
 		register_setting('wordplurk-options', 'wordplurk_Plurk2tw_en');
 		register_setting('wordplurk-options', 'wordplurk_login');
-		register_setting('wordplurk-options', 'wordplurk_cookie_exp_time');
-		register_setting('wordplurk-options', 'wordplurk_cookie');
 		register_setting('wordplurk-options', 'wordplurk_suapi_user');
 		register_setting('wordplurk-options', 'wordplurk_suapi_key');
-		register_setting('wordplurk-options', 'wordplurk_cmrt');
+		register_setting('wordplurk-options', 'wordplurk_version');
 	endif;
 }
 
@@ -223,4 +215,48 @@ function wordplurk_load_headers() {
 }
 
 add_action('wp_head', 'wordplurk_load_headers', 5);
+
+function wordplurk_update() {
+	$now_version = 3.0;
+	$db_version = get_option('wordplurk_version', 0);
+	if($db_version < 3.0):
+		if(function_exists('unregister_setting')):
+			unregister_setting('wordplurk-options', 'wordplurk_username');
+			unregister_setting('wordplurk-options', 'wordplurk_password');
+			unregister_setting('wordplurk-options', 'wordplurk_apikey');
+			unregister_setting('wordplurk-options', 'wordplurk_cookie_exp_time');
+			unregister_setting('wordplurk-options', 'wordplurk_cookie');
+			unregister_setting('wordplurk-options', 'wordplurk_cmrt');
+		endif;
+		if(function_exists('delete_option')):
+			delete_option('wordplurk_username');
+			delete_option('wordplurk_password');
+			delete_option('wordplurk_apikey');
+			delete_option('wordplurk_cookie_exp_time');
+			delete_option('wordplurk_cookie');
+			delete_option('wordplurk_cmrt');
+		endif;
+		global $wpdb;
+		global $table_prefix;
+		$post_type = array('post_type' => 'post');
+		$my_posts = get_posts($post_type);
+		foreach ( $my_posts as $my_post ):
+			$post_id = $my_post->ID;
+			$has_been_plurked = get_post_meta($post_id, 'has_been_plurked', true);
+			$plurkedornot = get_post_meta($post_id, 'wordplurk_plurkornot', true);
+			if($has_been_plurked != 'yes' and $plurkedornot != 1 ):
+				add_post_meta($post_id, 'wordplurk_plurkornot', '1');
+			endif;
+		endforeach;
+		$tablename = $table_prefix.'wordplurk_comment_cache';
+		$sql = 'SHOW TABLES LIKE \'' . $tablename . '\'';
+		$results = $wpdb->query($sql);
+		if ($results != 0):
+			$sql = 'DROP TABLE `'.$tablename.'`';
+			$results = $wpdb->query($sql);
+		endif;
+	endif;
+	update_option('wordplurk_version', $now_version);
+}
+add_action('plugins_loaded', 'wordplurk_update');
 ?>
