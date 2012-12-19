@@ -4,7 +4,7 @@ Plugin Name: WordPlurk improve
 Plugin URI: http://www.renn999.twbbs.org/wordplurk-improve
 Description: Generates Plurk Updates when a new Post is Published, Useing Official Plurk api, and Setting improve. Orginal Home page <a href="http://blog.bluefur.com/wordplurk">http://blog.bluefur.com/wordplurk</a>
 Author: <a href="http://www.renn999.twbbs.org">Renn999</a>, bluefur, Speedboxer.
-Version: 3.0
+Version: 3.1
 Text Domain: wordplurk-improve
 */
 
@@ -217,9 +217,9 @@ function wordplurk_load_headers() {
 add_action('wp_head', 'wordplurk_load_headers', 5);
 
 function wordplurk_update() {
-	$now_version = 3.0;
+	$now_version = 3.1;
 	$db_version = get_option('wordplurk_version', 0);
-	if($db_version < 3.0):
+	if($db_version < 3.1):
 		if(function_exists('unregister_setting')):
 			unregister_setting('wordplurk-options', 'wordplurk_username');
 			unregister_setting('wordplurk-options', 'wordplurk_password');
@@ -238,13 +238,13 @@ function wordplurk_update() {
 		endif;
 		global $wpdb;
 		global $table_prefix;
-		$post_type = array('post_type' => 'post');
+		$post_type = array('post_type' => 'post','numberposts' => -1);
 		$my_posts = get_posts($post_type);
 		foreach ( $my_posts as $my_post ):
 			$post_id = $my_post->ID;
 			$has_been_plurked = get_post_meta($post_id, 'has_been_plurked', true);
 			$plurkedornot = get_post_meta($post_id, 'wordplurk_plurkornot', true);
-			if($has_been_plurked != 'yes' and $plurkedornot != 1 ):
+			if( $has_been_plurked != 'yes' && $plurkedornot != 1 ):
 				add_post_meta($post_id, 'wordplurk_plurkornot', '1');
 			endif;
 		endforeach;

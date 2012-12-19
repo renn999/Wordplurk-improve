@@ -4,7 +4,7 @@ Donate link: http://www.renn999.twbbs.org/wordplurk-improve
 Tags: plurk
 Requires at least: 3.0
 Tested up to: 3.4
-Stable tag: 3.0
+Stable tag: 3.1
 
 WordPlurk improve is Base on 'WordPlurk', and add more settings and functions.
 
@@ -44,6 +44,9 @@ from http://plugins.svn.wordpress.org/wordplurk/trunk/readme.txt
 A: It is means that your server not support php curl please contect your adminstrator or install it.
 
 == Changelog ==
+
+= 3.1 =
+* (FIX) small bug fix.
 
 = 3.0 =
 * (NEW) Add Romanian language. ( thanks Alexander Ovsov "pivnyukip<AT>gmail.com" )
