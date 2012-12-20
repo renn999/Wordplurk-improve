@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WordPlurk improve 2.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wordplurk-improve\n"
-"POT-Creation-Date: 2012-12-19 03:13:37+00:00\n"
-"PO-Revision-Date: 2012-12-19 11:17+0800\n"
+"POT-Creation-Date: 2012-12-20 13:21:52+00:00\n"
+"PO-Revision-Date: 2012-12-20 21:22+0800\n"
 "Last-Translator: renn999 <renn999@gmail.com>\n"
 "Language-Team: renn999 <ennidit@renn999.co.cc>\n"
 "Language: \n"
@@ -17,211 +17,207 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: wordplurk-improve.php:163
-#: wordplurk-improve.php:183
+#: wordplurk-improve.php:142
+#: wordplurk-improve.php:162
 msgid "Wordplurk improve"
 msgstr "Wordplurk improve"
 
-#: wordplurk-improve.php:175
+#: wordplurk-improve.php:154
 msgid "Do not Plurk this post. (if the post hes been plurked, the plurk will be delete.)"
 msgstr "不要將此文章噗浪上去(如果文章已經噗浪上去了，噗浪將會被刪除)"
 
-#: wordplurk-improve_adminpage.php:19
-msgid "If you have bitly pro just select bit.ly or j.mp are the same."
-msgstr "如果你有使用bitly pro的話，選擇bit.ly或j.mp都是一樣的。"
-
-#: wordplurk-improve_adminpage.php:23
-msgid "Use Wordpress 3.0 wp_get_shortlink function to generate short url."
-msgstr "利用Wordpress 3.0 wp_get_shortlink function產生短網址"
-
-#: wordplurk-improve_adminpage.php:31
+#: wordplurk-improve_adminpage.php:17
 msgid "Settings"
 msgstr "設定"
 
-#: wordplurk-improve_adminpage.php:32
-msgid "Please enter your Plurk username and password below. All fields are required."
-msgstr "請填入您的Plurk帳號及密碼，以下設定皆需填入"
+#: wordplurk-improve_adminpage.php:18
+msgid "Please set your Wordplurk-improve below. All fields are required."
+msgstr "請設定您的Wordplurk-improve，以下設定皆需填入"
 
-#: wordplurk-improve_adminpage.php:34
+#: wordplurk-improve_adminpage.php:20
+msgid "Oauthorize Details:"
+msgstr "授權狀態："
+
+#: wordplurk-improve_adminpage.php:25
+msgid "User:"
+msgstr "帳號："
+
+#: wordplurk-improve_adminpage.php:27
+msgid "Issue Time:"
+msgstr "提交時間："
+
+#: wordplurk-improve_adminpage.php:30
+msgid "There is something wrong with aouthorize data, please reoauthorize."
+msgstr "您的授權有錯誤，請重新授權"
+
+#: wordplurk-improve_adminpage.php:35
 msgid "ReOauthorize"
 msgstr "重新授權"
 
-#: wordplurk-improve_adminpage.php:48
+#: wordplurk-improve_adminpage.php:41
 msgid "Wordplurk Template"
 msgstr "Wordplurk 樣式"
 
-#: wordplurk-improve_adminpage.php:51
+#: wordplurk-improve_adminpage.php:44
 msgid "What template do you want to show on Plurk."
 msgstr "你想要在Plurk上顯示怎樣的樣式"
 
-#: wordplurk-improve_adminpage.php:52
+#: wordplurk-improve_adminpage.php:45
 msgid "Post URL Link"
 msgstr "文章網址"
 
-#: wordplurk-improve_adminpage.php:53
+#: wordplurk-improve_adminpage.php:46
 msgid "Post Title"
 msgstr "文章標題"
 
-#: wordplurk-improve_adminpage.php:54
+#: wordplurk-improve_adminpage.php:47
 msgid "Part of the Post"
 msgstr "文章部份內容"
 
-#: wordplurk-improve_adminpage.php:58
+#: wordplurk-improve_adminpage.php:51
 msgid "Qualifier"
 msgstr "修飾詞"
 
-#: wordplurk-improve_adminpage.php:62
+#: wordplurk-improve_adminpage.php:55
 msgid "loves"
 msgstr "愛"
 
-#: wordplurk-improve_adminpage.php:63
+#: wordplurk-improve_adminpage.php:56
 msgid "likes"
 msgstr "喜歡"
 
-#: wordplurk-improve_adminpage.php:64
+#: wordplurk-improve_adminpage.php:57
 msgid "shares"
 msgstr "分享"
 
-#: wordplurk-improve_adminpage.php:65
+#: wordplurk-improve_adminpage.php:58
 msgid "gives"
 msgstr "給"
 
-#: wordplurk-improve_adminpage.php:66
+#: wordplurk-improve_adminpage.php:59
 msgid "hates"
 msgstr "討厭"
 
-#: wordplurk-improve_adminpage.php:67
+#: wordplurk-improve_adminpage.php:60
 msgid "wants"
 msgstr "想要"
 
-#: wordplurk-improve_adminpage.php:68
+#: wordplurk-improve_adminpage.php:61
 msgid "has"
 msgstr "已經"
 
-#: wordplurk-improve_adminpage.php:69
+#: wordplurk-improve_adminpage.php:62
 msgid "will"
 msgstr "打算"
 
-#: wordplurk-improve_adminpage.php:70
+#: wordplurk-improve_adminpage.php:63
 msgid "asks"
 msgstr "問"
 
-#: wordplurk-improve_adminpage.php:71
+#: wordplurk-improve_adminpage.php:64
 msgid "wishes"
 msgstr "期待"
 
-#: wordplurk-improve_adminpage.php:72
+#: wordplurk-improve_adminpage.php:65
 msgid "was"
 msgstr "曾經"
 
-#: wordplurk-improve_adminpage.php:73
+#: wordplurk-improve_adminpage.php:66
 msgid "feels"
 msgstr "覺得"
 
-#: wordplurk-improve_adminpage.php:74
+#: wordplurk-improve_adminpage.php:67
 msgid "thinks"
 msgstr "想"
 
-#: wordplurk-improve_adminpage.php:75
+#: wordplurk-improve_adminpage.php:68
 msgid "says"
 msgstr "說"
 
-#: wordplurk-improve_adminpage.php:76
+#: wordplurk-improve_adminpage.php:69
 msgid "is"
 msgstr "正在"
 
-#: wordplurk-improve_adminpage.php:77
+#: wordplurk-improve_adminpage.php:70
 msgid ":"
 msgstr ":"
 
-#: wordplurk-improve_adminpage.php:78
+#: wordplurk-improve_adminpage.php:71
 msgid "freestyle"
 msgstr "(自由發揮)"
 
-#: wordplurk-improve_adminpage.php:79
+#: wordplurk-improve_adminpage.php:72
 msgid "hopes"
 msgstr "希望"
 
-#: wordplurk-improve_adminpage.php:80
+#: wordplurk-improve_adminpage.php:73
 msgid "needs"
 msgstr "需要"
 
-#: wordplurk-improve_adminpage.php:81
+#: wordplurk-improve_adminpage.php:74
 msgid "wonders"
 msgstr "好奇"
 
-#: wordplurk-improve_adminpage.php:92
+#: wordplurk-improve_adminpage.php:85
 msgid "Select the Qualifier of the Plurk account entered above."
 msgstr "請選擇您要的Plurk修飾詞"
 
-#: wordplurk-improve_adminpage.php:95
+#: wordplurk-improve_adminpage.php:88
 msgid "language set"
 msgstr "設定語言"
 
-#: wordplurk-improve_adminpage.php:141
+#: wordplurk-improve_adminpage.php:134
 msgid "Select the language set of the Plurk account entered above."
 msgstr "請選擇您的Plurk設定語言"
 
-#: wordplurk-improve_adminpage.php:144
+#: wordplurk-improve_adminpage.php:137
 msgid "Short url"
 msgstr "短網址"
 
-#: wordplurk-improve_adminpage.php:170
+#: wordplurk-improve_adminpage.php:152
+msgid "Wordpress init shorturl function"
+msgstr "Wordpress 內部短網址功能"
+
+#: wordplurk-improve_adminpage.php:163
 msgid "Using the shorturl service to short post url."
 msgstr "利用短網址服務來縮短網址"
 
-#: wordplurk-improve_adminpage.php:175
-msgid "Short url Username"
-msgstr "短網址帳號"
-
-#: wordplurk-improve_adminpage.php:178
-msgid "You need to fill in the username to enable the Short URL service."
-msgstr "你需要輸入你的帳號以啟用短網址服務"
-
-#: wordplurk-improve_adminpage.php:181
-msgid "Short url API key"
-msgstr "短網址API Key"
-
-#: wordplurk-improve_adminpage.php:184
-msgid "You need to fill in the API KEY to enable the Short URL service"
-msgstr "你需要輸入你的api Key以啟用短網址服務"
-
-#: wordplurk-improve_adminpage.php:187
+#: wordplurk-improve_adminpage.php:167
 msgid "Post Plurk Responses"
 msgstr "頁面Plurk回應"
 
-#: wordplurk-improve_adminpage.php:206
+#: wordplurk-improve_adminpage.php:186
 msgid "This select will show the Plurk Responses after the post"
 msgstr "這個選擇將會在文章後面顯示Plurk的回應"
 
-#: wordplurk-improve_adminpage.php:210
+#: wordplurk-improve_adminpage.php:189
 msgid "Save Changes"
 msgstr "儲存設定"
 
-#: wordplurk-improve_adminpage.php:215
+#: wordplurk-improve_adminpage.php:194
 msgid "There are something wrong with the Curl test at your server, please check it was install and enabled, or contact your server admin"
 msgstr "Curl測試發生錯誤，請安裝並且啟動，否則請聯絡您的server管理員。"
 
-#: wordplurk-improve_adminpage.php:225
+#: wordplurk-improve_adminpage.php:204
 msgid "Please authorize Wordplurk-improve on the <a href=\"%1$s\" title=\"WordPlurk Settings\">WordPlurk Settings page</a>."
 msgstr "請在<a href=\"%1$s\" title=\"WordPlurk Settings\">WordPlurk設定頁面</a>授權Wordplurk-improve"
 
-#: wordplurk-improve_adminpage.php:227
+#: wordplurk-improve_adminpage.php:206
 msgid "Please set your Wordplurk-improve Settings on the <a href=\"%1$s\" title=\"WordPlurk Settings\">WordPlurk Settings page</a>."
 msgstr "請在<a href=\"%1$s\" title=\"WordPlurk Settings\">WordPlurk設定頁面</a>設定Wordplurk-improve"
 
-#: wordplurk-improve_plurkcomment.php:132
+#: wordplurk-improve_plurkcomment.php:102
 msgid "this post has %d plurk response, "
 msgid_plural "this post has %d plurk responses, "
 msgstr[0] "這篇噗共有%d個回應，"
 msgstr[1] "這篇噗共有%d個回應，"
 
-#: wordplurk-improve_plurkcomment.php:132
-#: wordplurk-improve_plurkcomment.php:146
+#: wordplurk-improve_plurkcomment.php:102
+#: wordplurk-improve_plurkcomment.php:116
 msgid "<a href=\"http://www.plurk.com/p/%s\">click here</a> to plurk page"
 msgstr "<a href=\"http://www.plurk.com/p/%s\">點這裡</a>查看plurk頁面"
 
-#: wordplurk-improve_plurkcomment.php:146
+#: wordplurk-improve_plurkcomment.php:116
 msgid "This post doesn't have any plurk response,"
 msgstr "這篇文章沒有任何 plurk回應，"
 
@@ -241,13 +237,28 @@ msgstr "Generates Plurk Updates when a new Post is Published, Useing Official Pl
 msgid "<a href=\"http://www.renn999.twbbs.org\">Renn999</a>, bluefur, Speedboxer."
 msgstr "<a href=\"http://www.renn999.twbbs.org\">Renn999</a>, bluefur, Speedboxer."
 
+#~ msgid "If you have bitly pro just select bit.ly or j.mp are the same."
+#~ msgstr "如果你有使用bitly pro的話，選擇bit.ly或j.mp都是一樣的。"
+
+#~ msgid "Use Wordpress 3.0 wp_get_shortlink function to generate short url."
+#~ msgstr "利用Wordpress 3.0 wp_get_shortlink function產生短網址"
+
+#~ msgid "Short url Username"
+#~ msgstr "短網址帳號"
+
+#~ msgid "You need to fill in the username to enable the Short URL service."
+#~ msgstr "你需要輸入你的帳號以啟用短網址服務"
+
+#~ msgid "Short url API key"
+#~ msgstr "短網址API Key"
+
+#~ msgid "You need to fill in the API KEY to enable the Short URL service"
+#~ msgstr "你需要輸入你的api Key以啟用短網址服務"
+
 #~ msgid ""
 #~ "Please check your Plurk username and password there is something wrong "
 #~ "with pre login"
 #~ msgstr "在預先登入的時候失敗，請確認您填入的Plurk帳號及密碼為正確的"
-
-#~ msgid "Username"
-#~ msgstr "帳號"
 
 #~ msgid "Enter the username of the Plurk account you want to post updates to."
 #~ msgstr "請在上面填入Plurk帳號"

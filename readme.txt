@@ -4,7 +4,7 @@ Donate link: http://www.renn999.twbbs.org/wordplurk-improve
 Tags: plurk
 Requires at least: 3.0
 Tested up to: 3.4
-Stable tag: 3.1
+Stable tag: 3.2
 
 WordPlurk improve is Base on 'WordPlurk', and add more settings and functions.
 
@@ -45,8 +45,13 @@ A: It is means that your server not support php curl please contect your adminst
 
 == Changelog ==
 
+= 3.2 =
+* (FIX) jquery loading function. (wordpress plugin admin email to me: "Repository Guideline Violation in your WordPress Plugin")
+* (ADD) show Oauthorize Details at setting page.
+* (FIX) "Fatal error: Allowed memory size...", when low memory at option submit will faild.
+
 = 3.1 =
-* (FIX) small bug fix.
+* (FIX) small bug fix. I forget this is php....(doh)
 
 = 3.0 =
 * (NEW) Add Romanian language. ( thanks Alexander Ovsov "pivnyukip<AT>gmail.com" )

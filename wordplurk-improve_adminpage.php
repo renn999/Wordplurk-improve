@@ -3,46 +3,39 @@ function wordplurk_options_subpanel()
 {
 if(function_exists('curl_init')):
 	$i = json_decode(get_option('wordplurk_login'),true);
-	if (!isset($i['success']) || isset($_POST['wordplurk_reoauth'])){
+	if (!isset($i['success']) || isset($_POST['wordplurk_reoauth']))
 		plurk_oauth(isset($_POST['wordplurk_reoauth']));
-	}
+	unset($i);
+	if(isset($_POST['submit_option'])):
+		unset($_POST['submit_option']);
+		foreach( $_POST as $key => $value ):
+			update_option($key,$value);
+		endforeach;
+	endif;
 	?>
-	<script type="text/javascript">
-	var $j = jQuery.noConflict();
-	$j().ready(function(){
-		$j('select#shorturl').change(function(){
-			$j('tr#select_option').hide();
-			$j('div#message').empty();
-			switch($j('select#shorturl option:selected').text()){
-				case 'bit.ly':
-				case 'j.mp':
-					$j('div#message').append('<?php _e('If you have bitly pro just select bit.ly or j.mp are the same.', 'wordplurk-improve');?>').show();
-					$j('tr#select_option').show();
-					break;
-				case 'Wordpress init shorturl function':
-					$j('div#message').append('<?php _e('Use Wordpress 3.0 wp_get_shortlink function to generate short url.', 'wordplurk-improve');?>').show();
-					break;
-			}
-		});
-		$j('select#shorturl').change();
-	});
-	</script>
 	<div class="wrap">
 	<h2>WordPlurk <?php _e('Settings', 'wordplurk-improve'); ?></h2>
-	<p><?php _e('Please enter your Plurk username and password below. All fields are required.', 'wordplurk-improve'); ?></p>
+	<p><?php _e('Please set your Wordplurk-improve below. All fields are required.', 'wordplurk-improve'); ?></p>
+	<div style=''><?php
+	_e("Oauthorize Details:", 'wordplurk-improve');
+	?><pre><?php
+		$i = json_decode(plurk_update_status(array(),'check'),True);
+		if(isset($i['user_id'])):
+			$j = json_decode(plurk_update_status(array(),'curruser'),true);
+			_e('User:', 'wordplurk-improve');
+			echo $j['nick_name']."\n";
+			_e('Issue Time:','wordplurk-improve');
+			echo $i['issued']."\n";
+		else:
+			_e('There is something wrong with aouthorize data, please reoauthorize.','wordplurk-improve');
+		endif;
+		unset($i,$j);
+	?></pre>
 	<form method="post" action="">
 	<input type="submit" name="wordplurk_reoauth" value="<?php _e('ReOauthorize', 'wordplurk-improve') ?>" />
 	</form>
-	<form method="post" action="options.php">
-	<?php
-	if(function_exists('settings_fields')):
-		settings_fields('wordplurk-options');
-	else:
-		wp_nonce_field('update-options');
-	?>
-	<input type="hidden" name="action" value="update" />
-	<input type="hidden" name="page_options" value="wordplurk_qualifier, wordplurk_language_set, wordplurk_template, wordplurk_shorturl_en, wordplurk_Plurk2tw_en, wordplurk_suapi_user, wordplurk_suapi_key, wordplurk_login" />
-	<?php endif; ?>
+	</div>
+	<form method="post" action="">
 	<table class="form-table">
 	<tr valign="top">
 	<th scope="row"><label for="wordplurk_template"><?php _e('Wordplurk Template', 'wordplurk-improve'); ?></label></th>
@@ -150,13 +143,13 @@ if(function_exists('curl_init')):
 		'2' => 'ppt.cc',
 		'3' => 'goo.gl',
 		'4' => 'is.gd',
-		'5' => 'bit.ly',
-		'6' => 'j.mp',
+		//'5' => 'bit.ly',
+		//'6' => 'j.mp',
 		'7' => '4fun.tw'
 	);
 	
 	if(function_exists('wp_get_shortlink'))
-		$shorturl_api['8'] = 'Wordpress init shorturl function';
+		$shorturl_api['8'] = sprintf(__('Wordpress init shorturl function', 'wordplurk-improve'));
 	
 	foreach($shorturl_api as $key => $val){
 		echo "\t\t<option value=\"$key\"";
@@ -168,20 +161,7 @@ if(function_exists('curl_init')):
 	</select>
 	<br />
 	<?php _e('Using the shorturl service to short post url.', 'wordplurk-improve');?><br />
-	<div id='message'></div>
 	</td>
-	</tr>
-	<tr valign="top" id='select_option'>
-	<th scope="row"><label for="wordplurk_suapi_user"><?php _e('Short url Username', 'wordplurk-improve'); ?></label></th>
-	<td><input type="text" name="wordplurk_suapi_user" value="<?php echo get_option('wordplurk_suapi_user'); ?>">
-	<br />
-	<?php _e('You need to fill in the username to enable the Short URL service.', 'wordplurk-improve');?></td>
-	</tr>
-	<tr valign="top" id='select_option'>
-	<th scope="row"><label for="wordplurk_suapi_key"><?php _e('Short url API key', 'wordplurk-improve'); ?></label></th>
-	<td><input type="text" name="wordplurk_suapi_key" value="<?php echo get_option('wordplurk_suapi_key'); ?>">
-	<br />
-	<?php _e('You need to fill in the API KEY to enable the Short URL service', 'wordplurk-improve');?></td>
 	</tr>
 	<tr valign="top">
 	<th scope="row"><label for="wordplurk_Plurk2tw_en"><?php _e('Post Plurk Responses', 'wordplurk-improve'); ?></label></th>
@@ -206,8 +186,7 @@ if(function_exists('curl_init')):
 	<?php _e('This select will show the Plurk Responses after the post', 'wordplurk-improve');?></td>
 	</tr>
 	</table>
-	<input type="hidden" name="wordplurk_login" value='<?php echo get_option('wordplurk_login','') ?>' />
-	<p class="submit"><input type="submit" name="submit" value="<?php _e('Save Changes', 'wordplurk-improve') ?>" /></p>
+	<p class="submit"><input type="submit" name='submit_option' value="<?php _e('Save Changes', 'wordplurk-improve') ?>" /></p>
 	</form>
 	</div>
 	<?php

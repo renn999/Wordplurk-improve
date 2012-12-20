@@ -34,10 +34,13 @@ function plurk_oauth($reoauth=false)
 		$result = $oauthObject->sign(array(
 		    'path'      =>' http://www.plurk.com/OAuth/authorize',
 		    'parameters'=> array(
-		        'oauth_token' => $i['request_token']),
+		        'oauth_token' => $i['request_token'],
+		        'deviceid' => 'Wordpress'
+		    ),
 		    'signatures'=> $signatures));
 
 		echo "<SCRIPT LANGUAGE=\"JavaScript\">window.location=\"$result[signed_url]\";</script>";
+		unset($oauthObject);
 		exit;
 	} else {
 		$i = json_decode(get_option('wordplurk_login', Null),true);
@@ -67,7 +70,7 @@ function plurk_oauth($reoauth=false)
 	}
 }
 
-function plurk_update_status($new_status, $post_state)
+function plurk_update_status( $new_status, $post_state )
 {
 	$baseurl = 'http://www.plurk.com/APP/';
 	switch($post_state):
@@ -82,6 +85,12 @@ function plurk_update_status($new_status, $post_state)
 			break;
 		case 'responses':
 			$request_url = $baseurl.'Responses/get';
+			break;
+		case 'check':
+			$request_url = $baseurl.'checkToken';
+			break;
+		case 'curruser':
+			$request_url = $baseurl.'Users/currUser';
 	endswitch;
 	$oauthObject = new OAuthSimple();
 	$signatures = json_decode(get_option('wordplurk_login'),true);
@@ -89,6 +98,7 @@ function plurk_update_status($new_status, $post_state)
 	    'path'      => $request_url,
 	    'parameters'=> $new_status,
 	    'signatures'=> $signatures));
+	unset($oauthObject);
 	return curl_file_get_contents($result['signed_url']);
 }
 ?>

@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WordPlurk improve package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WordPlurk improve 3.0\n"
+"Project-Id-Version: WordPlurk improve 3.2\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wordplurk-improve\n"
-"POT-Creation-Date: 2012-12-19 03:13:37+00:00\n"
+"POT-Creation-Date: 2012-12-20 13:21:52+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,219 +12,214 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: wordplurk-improve.php:163 wordplurk-improve.php:183
+#: wordplurk-improve.php:142 wordplurk-improve.php:162
 msgid "Wordplurk improve"
 msgstr ""
 
-#: wordplurk-improve.php:175
+#: wordplurk-improve.php:154
 msgid ""
 "Do not Plurk this post. (if the post hes been plurked, the plurk will be "
 "delete.)"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:19
-msgid "If you have bitly pro just select bit.ly or j.mp are the same."
-msgstr ""
-
-#: wordplurk-improve_adminpage.php:23
-msgid "Use Wordpress 3.0 wp_get_shortlink function to generate short url."
-msgstr ""
-
-#: wordplurk-improve_adminpage.php:31
+#: wordplurk-improve_adminpage.php:17
 msgid "Settings"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:32
-msgid ""
-"Please enter your Plurk username and password below. All fields are required."
+#: wordplurk-improve_adminpage.php:18
+msgid "Please set your Wordplurk-improve below. All fields are required."
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:34
+#: wordplurk-improve_adminpage.php:20
+msgid "Oauthorize Details:"
+msgstr ""
+
+#: wordplurk-improve_adminpage.php:25
+msgid "User:"
+msgstr ""
+
+#: wordplurk-improve_adminpage.php:27
+msgid "Issue Time:"
+msgstr ""
+
+#: wordplurk-improve_adminpage.php:30
+msgid "There is something wrong with aouthorize data, please reoauthorize."
+msgstr ""
+
+#: wordplurk-improve_adminpage.php:35
 msgid "ReOauthorize"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:48
+#: wordplurk-improve_adminpage.php:41
 msgid "Wordplurk Template"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:51
+#: wordplurk-improve_adminpage.php:44
 msgid "What template do you want to show on Plurk."
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:52
+#: wordplurk-improve_adminpage.php:45
 msgid "Post URL Link"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:53
+#: wordplurk-improve_adminpage.php:46
 msgid "Post Title"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:54
+#: wordplurk-improve_adminpage.php:47
 msgid "Part of the Post"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:58
+#: wordplurk-improve_adminpage.php:51
 msgid "Qualifier"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:62
+#: wordplurk-improve_adminpage.php:55
 msgid "loves"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:63
+#: wordplurk-improve_adminpage.php:56
 msgid "likes"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:64
+#: wordplurk-improve_adminpage.php:57
 msgid "shares"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:65
+#: wordplurk-improve_adminpage.php:58
 msgid "gives"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:66
+#: wordplurk-improve_adminpage.php:59
 msgid "hates"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:67
+#: wordplurk-improve_adminpage.php:60
 msgid "wants"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:68
+#: wordplurk-improve_adminpage.php:61
 msgid "has"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:69
+#: wordplurk-improve_adminpage.php:62
 msgid "will"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:70
+#: wordplurk-improve_adminpage.php:63
 msgid "asks"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:71
+#: wordplurk-improve_adminpage.php:64
 msgid "wishes"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:72
+#: wordplurk-improve_adminpage.php:65
 msgid "was"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:73
+#: wordplurk-improve_adminpage.php:66
 msgid "feels"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:74
+#: wordplurk-improve_adminpage.php:67
 msgid "thinks"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:75
+#: wordplurk-improve_adminpage.php:68
 msgid "says"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:76
+#: wordplurk-improve_adminpage.php:69
 msgid "is"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:77
+#: wordplurk-improve_adminpage.php:70
 msgid ":"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:78
+#: wordplurk-improve_adminpage.php:71
 msgid "freestyle"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:79
+#: wordplurk-improve_adminpage.php:72
 msgid "hopes"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:80
+#: wordplurk-improve_adminpage.php:73
 msgid "needs"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:81
+#: wordplurk-improve_adminpage.php:74
 msgid "wonders"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:92
+#: wordplurk-improve_adminpage.php:85
 msgid "Select the Qualifier of the Plurk account entered above."
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:95
+#: wordplurk-improve_adminpage.php:88
 msgid "language set"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:141
+#: wordplurk-improve_adminpage.php:134
 msgid "Select the language set of the Plurk account entered above."
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:144
+#: wordplurk-improve_adminpage.php:137
 msgid "Short url"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:170
+#: wordplurk-improve_adminpage.php:152
+msgid "Wordpress init shorturl function"
+msgstr ""
+
+#: wordplurk-improve_adminpage.php:163
 msgid "Using the shorturl service to short post url."
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:175
-msgid "Short url Username"
-msgstr ""
-
-#: wordplurk-improve_adminpage.php:178
-msgid "You need to fill in the username to enable the Short URL service."
-msgstr ""
-
-#: wordplurk-improve_adminpage.php:181
-msgid "Short url API key"
-msgstr ""
-
-#: wordplurk-improve_adminpage.php:184
-msgid "You need to fill in the API KEY to enable the Short URL service"
-msgstr ""
-
-#: wordplurk-improve_adminpage.php:187
+#: wordplurk-improve_adminpage.php:167
 msgid "Post Plurk Responses"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:206
+#: wordplurk-improve_adminpage.php:186
 msgid "This select will show the Plurk Responses after the post"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:210
+#: wordplurk-improve_adminpage.php:189
 msgid "Save Changes"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:215
+#: wordplurk-improve_adminpage.php:194
 msgid ""
 "There are something wrong with the Curl test at your server, please check it "
 "was install and enabled, or contact your server admin"
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:225
+#: wordplurk-improve_adminpage.php:204
 msgid ""
 "Please authorize Wordplurk-improve on the <a href=\"%1$s\" title=\"WordPlurk "
 "Settings\">WordPlurk Settings page</a>."
 msgstr ""
 
-#: wordplurk-improve_adminpage.php:227
+#: wordplurk-improve_adminpage.php:206
 msgid ""
 "Please set your Wordplurk-improve Settings on the <a href=\"%1$s\" title="
 "\"WordPlurk Settings\">WordPlurk Settings page</a>."
 msgstr ""
 
-#: wordplurk-improve_plurkcomment.php:132
+#: wordplurk-improve_plurkcomment.php:102
 msgid "this post has %d plurk response, "
 msgid_plural "this post has %d plurk responses, "
 msgstr[0] ""
 msgstr[1] ""
 
-#: wordplurk-improve_plurkcomment.php:132
-#: wordplurk-improve_plurkcomment.php:146
+#: wordplurk-improve_plurkcomment.php:102
+#: wordplurk-improve_plurkcomment.php:116
 msgid "<a href=\"http://www.plurk.com/p/%s\">click here</a> to plurk page"
 msgstr ""
 
-#: wordplurk-improve_plurkcomment.php:146
+#: wordplurk-improve_plurkcomment.php:116
 msgid "This post doesn't have any plurk response,"
 msgstr ""
 
